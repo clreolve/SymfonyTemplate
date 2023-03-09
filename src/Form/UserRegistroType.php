@@ -2,12 +2,15 @@
 
 namespace App\Form;
 
-use App\Entity\User;
+use App\Entity\Usuario;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UserRegistroType extends AbstractType
 {
@@ -16,28 +19,27 @@ class UserRegistroType extends AbstractType
         $builder
             ->add('email', EmailType::class)
             //->add('roles')
-            ->add('nombre', NotBlank::class)
-            ->add('apellido',NotBlank::class)
-            ->add('tipo', ChoiceType::class,array(
-                'choices'  => [
-                    'Supervisor' => 'SUPERVISOR',
-                    'Vendedor' => 'VENDEDOR',
-                    'Cliente' => 'CLIENTE',
-                ],
-                'constraints' => [
-                    'message' => 'Este campo es requerido'
-                ]
-                )
-                )
+            ->add('nombre', TextType::class, [
+
+            ])
+            ->add('apellido')
+            ->add('tipo', ChoiceType::class,[
+            'choices'  => [
+                'Supervisor' => 'SUPERVISOR',
+                'Vendedor' => 'VENDEDOR',
+                'Cliente' => 'CLIENTE'
+            ]
+            ])
             //->add('activo')
-            ->add('password', PasswordType::class)
+            ->add('plain_password', PasswordType::class, ['mapped' => false])
+            ->add('submit', SubmitType::class)
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            'data_class' => Usuario::class,
         ]);
     }
 }

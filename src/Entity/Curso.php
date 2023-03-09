@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Curso
  *
- * @ORM\Table(name="curso", indexes={@ORM\Index(name="IDX_CA3B40ECA76ED395", columns={"user_id"})})
+ * @ORM\Table(name="curso", indexes={@ORM\Index(name="IDX_CA3B40ECDB38439E", columns={"usuario_id"})})
  * @ORM\Entity
  */
 class Curso
@@ -15,12 +15,12 @@ class Curso
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Column(name="id_curso", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="curso_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="curso_id_curso_seq", allocationSize=1, initialValue=1)
      */
-    private $id;
+    private $idCurso;
 
     /**
      * @var string
@@ -51,18 +51,18 @@ class Curso
     private $activo;
 
     /**
-     * @var \User
+     * @var \Usuario
      *
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="Usuario")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="usuario_id", referencedColumnName="id_usuario")
      * })
      */
-    private $user;
+    private $usuario;
 
-    public function getId(): ?int
+    public function getIdCurso(): ?int
     {
-        return $this->id;
+        return $this->idCurso;
     }
 
     public function getNombre(): ?string
@@ -113,14 +113,14 @@ class Curso
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUsuario(): ?Usuario
     {
-        return $this->user;
+        return $this->usuario;
     }
 
-    public function setUser(?User $user): self
+    public function setUsuario(?Usuario $usuario): self
     {
-        $this->user = $user;
+        $this->usuario = $usuario;
 
         return $this;
     }
