@@ -23,12 +23,14 @@ class RegistrationController extends AbstractController
     {
         $user = new Usuario();
         $form = $this->createForm(UserRegistroType::class, $user);
+        $rol = $form['tipo']->getData();
+        $rol = $rol!="ADMIN" ? $rol : "DEFAULT";
 
         $form->handleRequest($request); //determina si el formulario fue enviado
         if ($form->isSubmitted() && $form->isValid()) {
             //si el formulario es enviado y es valido
             $user->setActivo(true);
-            $user->setRoles(['ROLE_USER']);
+            $user->setRoles(['ROLE_USER', "ROLE_{$rol}"]);
 
             $user->setPassword(
                 $encoder->hashPassword(

@@ -1,76 +1,60 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>{% block title %}SymfonyApp {% endblock %}</title>
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"
-    />
-    {# Run `composer require symfony/webpack-encore-bundle` to start using
-    Symfony UX #} {% block stylesheets %}
-    {{
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>
+			{% block title %}SymfonyApp
+			{% endblock %}
+		</title>
+		<link
+		rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"/>
+		{# Run `composer require symfony/webpack-encore-bundle` to start using
+												    Symfony UX #}
+		{% block stylesheets %}
+			{{
       encore_entry_link_tags("app")
     }}
-    {% endblock %} {% block javascripts %}
-    {{
+		{% endblock %}
+		{% block javascripts %}
+			{{
       encore_entry_script_tags("app")
     }}
-    {% endblock %}
+		{% endblock %}
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	</head>
+	<body>
 
-    <nav class="navbar navbar-brand navbar-dark bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="{{ path('home') }}">APP Symfony</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <ul class="navbar-nav mr-auto">
-            <li>
-              <a class="nav-link" href="{{ path('home') }}">Home</a>
-            </li>
-          </ul>
-          <ul class="navbar-nav mr-left">
-            {% if app.user %}
-            <li>
-              <p class="nav-link">{{ app.user.userIdentifier }}</p>
-            </li>
 
-            <li>
-              <a
-                class="nav-link btn btn-danger navbar-right"
-                href="{{ path('app_logout') }}"
-                >Logout</a
-              >
-            </li>
-            {% endif %}
-          </ul>
-        </div>
-      </div>
-    </nav>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" href="{{ path('home') }}">APP Symfony</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse navbar-expand" id="navbarNavAltMarkup">
+				<ul class="navbar-nav mr-auto">
+					<li>
+						<a class="nav-link" href="{{ path('home') }}">Home</a>
+					</li>
+				</ul>
+				<ul class="navbar-nav navbar-right">
+					{% if app.user %}
+						<li>
+							<a class="nav-link">{{ app.user.userIdentifier }}</a>
+						</li>
 
-    {% block body %}{% endblock %}
-  </body>
+						<li>
+							<a class="nav-link text-danger" href="{{ path('app_logout') }}">Logout</a>
+						</li>
+					{% endif %}
+				</ul>
+			</div>
+
+		</nav>
+
+		{% block body %}{% endblock %}
+	</body>
 </html>
