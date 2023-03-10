@@ -1,8 +1,66 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello RegistrationController!{% endblock %}
+{% block title %}Registro
+{% endblock %}
 
 {% block body %}
-{{form(formulario)}}
+	<div class="container align-content-center align-items-center w-50 h-100">
+        
+
+		{{form_start(formulario)}}
+
+        <div class="h1 mt-2 mb-4">Registrate</div>
+		{{form_row(formulario.email, 
+                {   'attr': {
+                        'class': 'form-control mb-2'
+                        }
+                })
+            }}
+
+		{{form_row(formulario.nombre, 
+                {   'attr': {
+                        'class': 'form-control mb-2'
+                        }
+                })
+            }}
+
+		{{form_row(formulario.apellido, 
+                {   'attr': {
+                        'class': 'form-control mb-2'
+                        }
+                })
+            }}
+
+		{{form_row(formulario.tipo, 
+                {   'attr': {
+                        'class': 'form-control mb-2'
+                        }
+                })
+            }}
+
+		{{form_row(formulario.plain_password, 
+                {   'label': 'Contraseña',
+                'attr': {
+                        'class': 'form-control mb-2'
+                        }
+                })
+            }}
+
+		{{form_row(formulario.submit, 
+                {   
+                    'label': 'Enviar',
+                    'attr': {
+                        'class': 'btn btn-primary mb-2'
+                        }
+                })
+            }}
+
+
+		{{form_end(formulario)}}
+
+        <a href="{{path("app_login")}}" class="text-primary text-center">Ya tienes cuenta ingresa aqui</a>
+
+	</div>
+
 
 {% endblock %}
