@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %} {% block title %}Lista de Incidentes{% endblock
+%} {% block body %}
+
+<div class="container my-5">
+  <div class="row">
+    <div class="col-10"><h1>Incidentes Actuales</h1></div>
+    <div class="col-2">
+        <a class="btn btn-warning" href="{{path('incidentes_crear')}}">
+        Registrar Incidente</a>
+    </div>
+  </div>
+  <hr />
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Lugar</th>
+        <th scope="col">Fecha</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {%for e in incidentes%}
+      <tr>
+        <th scope="row">{{ e.idIncidente }}</th>
+        <td>{{ e.descripcion }}</td>
+        <td>{{ e.lugar }}</td>
+        <td>{{e.fecha|date("d/M/Y")}}</td>
+        <td><div class="btn btn-success">Finalizar</div></td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+
+  <h1>Incidentes Resueltos</h1>
+  <hr />
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Lugar</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">TipoIncidente</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {%for e in incidentesF%}
+      <tr>
+        <th scope="row">{{ e.idIncidente }}</th>
+        <td>{{ e.descripcion }}</td>
+        <td>{{ e.lugar }}</td>
+        <td>{{e.fecha|date("d/M/Y")}}</td>
+        <td>@mdo</td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
