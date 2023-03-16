@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %} {% block title %}Login{% endblock %} {% block
 body %}
 <div
-  class="container d-flex align-content-center align-items-center w-25 h-100"
+  class="d-flex align-content-center align-items-center w-50 h-100 mx-auto"
 >
 
   <form method="post" class="col">
@@ -11,8 +11,8 @@ body %}
     </div>
     {% endif %} 
 
-    <h1 class="text-center row mb-4 mt-4">Bienvenido de Vuelta</h1>
-    <div class="row form-group mb-4">
+    <h1 class="text-center row mb-2 mt-4">Bienvenido de Vuelta</h1>
+    <div class="row form-group mb-2">
       <label for="inputEmail">Correo</label>
       <input
         type="email"
@@ -25,7 +25,7 @@ body %}
         autofocus
       />
     </div>
-    <div class="row form-group mb-4">
+    <div class="row form-group mb-2">
       <label for="inputPassword">Contraseña</label>
       <input
         type="password"
@@ -37,7 +37,7 @@ body %}
       />
     </div>
 
-    <div class="row  mb-4">
+    <div class="row  mb-2">
       <input
         type="hidden"
         name="_csrf_token"
