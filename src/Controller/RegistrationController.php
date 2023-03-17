@@ -20,21 +20,22 @@ class RegistrationController extends AbstractController
         EntityManagerInterface $em,
         UserPasswordHasherInterface $encoder
     ): Response
-    {
+    {/* 
         if($this->getUser()){
             return $this->redirectToRoute('home');
-        }
+        } */
 
         $user = new Usuario();
         $form = $this->createForm(UserRegistroType::class, $user);
-        $rol = $form['tipo']->getData();
-        $rol = $rol!="ADMIN" ? $rol : "DEFAULT";
+        
 
         $form->handleRequest($request); //determina si el formulario fue enviado
         if ($form->isSubmitted() && $form->isValid()) {
             //si el formulario es enviado y es valido
             $user->setActivo(true);
-            $user->setRoles(['ROLE_USER', "ROLE_{$rol}"]);
+            $rol = $form['tipo']->getData();
+            $rol = $rol != "ADMIN" ? $rol : "DEFAULT";
+            $user->setRoles(["ROLE_{$rol}"]);
 
             $user->setPassword(
                 $encoder->hashPassword(

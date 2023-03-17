@@ -7,7 +7,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <title>{% block title %}SymfonyApp {% endblock %}</title>
+    <title>{% block title %}SymfonyApp{% endblock %}</title>
     <!-- plugins:css -->
     <link
       rel="stylesheet"
@@ -128,7 +128,7 @@
                   <h6 class="p-3 mb-0">Perfil</h6>
 
                   <!--Logout-->
-                  <a class="dropdown-item preview-item">
+                  <a class="dropdown-item preview-item" href="{{ path('app_logout') }}">
                     <div class="preview-thumbnail">
                       <div class="preview-icon bg-dark rounded-circle">
                         <i class="mdi mdi-logout text-danger"></i>
@@ -137,7 +137,6 @@
                     <div class="preview-item-content">
                       <p
                         class="preview-subject mb-1"
-                        href="{{ path('app_logout') }}"
                       >
                         Salir
                       </p>
@@ -167,15 +166,19 @@
 
 			<!--Cabecera de la Pagina-->
             <div class="page-header">
-              <h3 class="page-title">Form elements</h3>
-              <nav aria-label="breadcrumb">
+              <h3 class="page-title">
+                {% block cabecera %}
+                {{ titulo ?? "SASF"}}
+                {% endblock %}
+                </h3>
+              <!-- <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="#">Forms</a></li>
                   <li class="breadcrumb-item active" aria-current="page">
                     Form elements
                   </li>
                 </ol>
-              </nav>
+              </nav> -->
             </div>
 
 			<!-- Cuerpo de la Pagina-->
@@ -191,7 +194,7 @@
             >
               <span
                 class="text-muted d-block text-center text-sm-left d-sm-inline-block"
-                >Copyright © bootstrapdash.com 2020</span
+                >SUDAMERICANA DE SOFTWARE S.A.</span
               >
               <span
                 class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"
