@@ -1,60 +1,240 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<!-- Required meta tags -->
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>
-			{% block title %}SymfonyApp
-			{% endblock %}
-		</title>
-		<link
-		rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"/>
-		{# Run `composer require symfony/webpack-encore-bundle` to start using
-												    Symfony UX #}
-		{% block stylesheets %}
-			{{
+<html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>{% block title %}SymfonyApp {% endblock %}</title>
+    <!-- plugins:css -->
+    <link
+      rel="stylesheet"
+      href="{{ asset('assets/vendors/mdi/css/materialdesignicons.min.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ asset('assets/vendors/css/vendor.bundle.base.css') }}"
+    />
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link
+      rel="stylesheet"
+      href="{{ asset('assets/vendors/select2/select2.min.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{
+        asset(
+          'assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css'
+        )
+      }}"
+    />
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
+    <!-- End layout styles -->
+    <link
+      rel="shortcut icon"
+      href="{{ asset('assets/images/logomini.svg') }}"
+    />
+
+    {# Run `composer require symfony/webpack-encore-bundle` to start using
+    Symfony UX #} {% block stylesheets %}
+    {{
       encore_entry_link_tags("app")
     }}
-		{% endblock %}
-		{% block javascripts %}
-			{{
+    {% endblock %} {% block javascripts %}
+    {{
       encore_entry_script_tags("app")
     }}
-		{% endblock %}
+    {% endblock %}
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:../../partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div
+          class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top"
+        >
+          <a class="sidebar-brand brand-logo" href="../../index.html"
+            ><img src="{{ asset('assets/images/logofull.svg') }}" alt="logo"
+          /></a>
+          <a class="sidebar-brand brand-logo-mini" href="../../index.html"
+            ><img src="{{ asset('assets/images/logomini.svg') }}" alt="logo"
+          /></a>
+        </div>
+        <ul class="nav">
+          <li class="nav-item nav-category">
+            <span class="nav-link">Dashboard</span>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="../../pages/tables/basic-table.html">
+              <span class="menu-icon">
+                <i class="mdi mdi-table-large"></i>
+              </span>
+              <span class="menu-title">Tables</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <nav class="navbar p-0 fixed-top d-flex flex-row">
+          <div
+            class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center"
+          >
+            <a class="navbar-brand brand-logo-mini" href="../../index.html"
+              ><img src="../../assets/images/logomini.svg" alt="logo"
+            /></a>
+          </div>
+          <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+            <button
+              class="navbar-toggler navbar-toggler align-self-center"
+              type="button"
+              data-toggle="minimize"
+            >
+              <span class="mdi mdi-menu h2"></span>
+            </button>
+            <ul class="navbar-nav navbar-nav-right mr-3">
+              {% if app.user %}
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link"
+                  id="profileDropdown"
+                  href="#"
+                  data-toggle="dropdown"
+                >
+                  <div class="navbar-profile">
+                    <img
+                      class="img-xs rounded-circle"
+                      src="{{ asset('assets/images/user.svg') }}"
+                      alt=""
+                    />
 
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-	</head>
-	<body>
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name">
+                      {{ app.user.userIdentifier }}
+                    </p>
+                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                  </div>
+                </a>
+                <div
+                  class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                  aria-labelledby="profileDropdown"
+                >
+                  <h6 class="p-3 mb-0">Perfil</h6>
 
+                  <!--Logout-->
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-logout text-danger"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p
+                        class="preview-subject mb-1"
+                        href="{{ path('app_logout') }}"
+                      >
+                        Salir
+                      </p>
+                    </div>
+                  </a>
+                </div>
+              </li>
+              {%else%}
+              <li class="nav-item">
+                <a href="#" target="_blank" rel="noopener noreferrer">
+                  <i class="mdi mdi-login-variant text-success h2"></i>
+                </a>
+              </li>
+              {%endif%}
+            </ul>
+            <button
+              class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
+              type="button"
+              data-toggle="offcanvas"
+            >
+              <span class="mdi mdi-format-line-spacing"></span>
+            </button>
+          </div>
+        </nav>
+        <div class="main-panel">
+          <div class="content-wrapper">
 
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a class="navbar-brand" href="{{ path('home') }}">APP Symfony</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse navbar-expand" id="navbarNavAltMarkup">
-				<ul class="navbar-nav mr-auto">
-					<li>
-						<a class="nav-link" href="{{ path('home') }}">Home</a>
-					</li>
-				</ul>
-				<ul class="navbar-nav navbar-right">
-					{% if app.user %}
-						<li>
-							<a class="nav-link text-warning">{{ app.user.userIdentifier }}</a>
-						</li>
+			<!--Cabecera de la Pagina-->
+            <div class="page-header">
+              <h3 class="page-title">Form elements</h3>
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">Forms</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">
+                    Form elements
+                  </li>
+                </ol>
+              </nav>
+            </div>
 
-						<li>
-							<a class="nav-link text-danger" href="{{ path('app_logout') }}">Logout</a>
-						</li>
-					{% endif %}
-				</ul>
-			</div>
-
-		</nav>
-
-		{% block body %}{% endblock %}
-	</body>
+			<!-- Cuerpo de la Pagina-->
+            <div class="row">
+				{% block body %}{% endblock %}
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+          <footer class="footer">
+            <div
+              class="d-sm-flex justify-content-center justify-content-sm-between"
+            >
+              <span
+                class="text-muted d-block text-center text-sm-left d-sm-inline-block"
+                >Copyright © bootstrapdash.com 2020</span
+              >
+              <span
+                class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"
+              >
+                Free
+                <a
+                  href="https://www.bootstrapdash.com/bootstrap-admin-template/"
+                  target="_blank"
+                  >Bootstrap admin templates</a
+                >
+                from Bootstrapdash.com</span
+              >
+            </div>
+          </footer>
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="{{
+        asset('assets/vendors/js/vendor.bundle.base.js')
+      }}"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="{{ asset('assets/vendors/select2/select2.min.js') }}"></script>
+    <script src="{{
+        asset('assets/vendors/typeahead.js/typeahead.bundle.min.js')
+      }}"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="{{ asset('assets/js/off-canvas.js') }}"></script>
+    <script src="{{ asset('assets/js/hoverable-collapse.js') }}"></script>
+    <script src="{{ asset('assets/js/misc.js') }}"></script>
+    <script src="{{ asset('assets/js/settings.js') }}"></script>
+    <script src="{{ asset('assets/js/todolist.js') }}"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="{{ asset('assets/js/file-upload.js') }}"></script>
+    <script src="{{ asset('assets/js/typeahead.js') }}"></script>
+    <script src="{{ asset('assets/js/select2.js') }}"></script>
+    <!-- End custom js for this page -->
+  </body>
 </html>
