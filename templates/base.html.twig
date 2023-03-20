@@ -190,7 +190,9 @@
             </div>
 
             <!-- Cuerpo de la Pagina-->
-            <div class="row">{% block body %}{% endblock %}</div>
+            {% block body %}
+
+              {% endblock %}
           </div>
           <!-- content-wrapper ends -->
           <!-- partial:../../partials/_footer.html -->
