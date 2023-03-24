@@ -3,21 +3,18 @@
 
 {% block
 body %}
-
 <div class="row">
-  <div class="col-sm-6 grid-margin stretch-card">
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">Login</h4>
-      <p class="card-description">Bienvenido de Nuevo</p>
-
-      <form method="post" class="forms-sample">
+  {% embed "partials/_card50.html.twig" %}
+        {% block titulo %}Inicio de Sesion{% endblock %}
+        {% block descripcion %}Bienvenido de Vuelta{% endblock %}
+        {% block cuerpo %}
+            <form method="post" class="forms-sample">
         {% if error %}
         <div class="alert alert-danger row">
           {{ error.messageKey|trans(error.messageData, 'security') }}
         </div>
         {% endif %}
-        <div class="row form-group mb-4">
+        <div class="form-group">
           <label for="inputEmail">Correo</label>
           <input
             type="email"
@@ -30,7 +27,7 @@ body %}
             autofocus
           />
         </div>
-        <div class="row form-group mb-4">
+        <div class="form-group">
           <label for="inputPassword">Contraseña</label>
           <input
             type="password"
@@ -42,39 +39,20 @@ body %}
           />
         </div>
 
-        <div class="row mb-4">
-          <input
-            type="hidden"
-            name="_csrf_token"
-            value="{{ csrf_token('authenticate') }}"
-          />
-        </div>
-        {# Uncomment this section and add a remember_me option below your
-        firewall to activate remember me functionality. See
-        https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" name="_remember_me" /> Remember me
-          </label>
-        </div>
-        #}
-
-        <div class="row mb-4">
-          <button class="btn btn-lg btn-primary" type="submit">Entrar</button>
-        </div>
-
-        <div class="row mb-4">
-          <a
-            class="text-primary text-center"
-            href="{{ path('app_registration') }}"
-            >No tienes cuenta Registrate</a
-          >
-        </div>
+        <input
+          type="hidden"
+          name="_csrf_token"
+          value="{{ csrf_token('authenticate') }}"
+        />
+        <button class="btn btn-lg btn-primary" type="submit">Entrar</button>
+        <hr>
+        <a
+          class="text-primary text-center"
+          href="{{ path('app_registration') }}"
+          >No tienes cuenta Registrate</a
+        >
       </form>
-    </div>
-  </div>
-</div>
-
+        {% endblock %}
+    {% endembed %}
 </div>
 {% endblock %}
