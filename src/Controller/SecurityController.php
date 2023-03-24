@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Usuario;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,6 +15,22 @@ class SecurityController extends AbstractController
     public function home(): Response
     {
         return $this->redirectToRoute("app_login");
+    }
+
+    #[Route(path: '/usuarios', name: 'app_usuarios')]
+    public function usuarios(EntityManagerInterface $em): Response
+    {
+        
+        /* $usuarios = array();
+        array_push($usuarios, $this->getUser()); */
+        
+        $usuarios = $em->getRepository(Usuario::class)->findAll();
+        /* if (in_array('ROLE_SUPERVISOR', $this->getUser()->getRoles(), true)) {
+        } */
+
+        return $this->render('security/usuarios_lista.html.twig', [
+            'usuarios' => $usuarios,
+        ]);
     }
 
     #[Route(path: '/login', name: 'app_login')]

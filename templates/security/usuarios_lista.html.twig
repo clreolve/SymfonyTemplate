@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %} {% block title %}Login{% endblock %} 
+
+
+{% block
+body %}
+<div class="row">
+  {% embed "partials/_card12.html.twig" %}
+        {% block titulo %}Lista de Usuarios{% endblock %}
+        {% block descripcion %}Usuarios Inscritos en la Aplicación{% endblock %}
+        {% block cuerpo %}
+          <div class="table-responsive">
+                      <table class="table table-bordered table-hover">
+                        <thead>
+                          <tr class="text-info">
+                            <th> Email </th>
+                            <th> Nombre </th>
+                            <th> Apellido </th>
+                            <th> Tipo </th>
+                            <th> Estado </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for u in usuarios %}
+                          <tr class="text-light">
+                            <td> {{u.email}} </td>
+                            <td> {{u.nombre}} </td>
+                            <td> {{u.apellido}} </td>
+                            <td> {{u.tipo}} </td>
+
+                            {% if u.activo %}
+                            <td class="text-primary"> Activo </td>
+                            {% else %}
+                            <td class="text-danger"> Baneado </td>
+                            {% endif %}
+                            
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+        {% endblock %}
+    {% endembed %}
+</div>
+{% endblock %}
