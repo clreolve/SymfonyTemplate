@@ -48,12 +48,10 @@ class RegistrationController extends AbstractController
             try {
                 $em->persist($user);
                 $em->flush();
-                $this->addFlash(type: 'exito', message: "Usuario creado");
+                $this->addFlash(type: 'success', message: "Usuario creado");
             } catch (UniqueConstraintViolationException $e) {
                 $this->addFlash(type: 'danger', message: "El email ya esta registrado");
             }
-
-            return $this->redirectToRoute('home');
         }
 
         return $this->render('registration/index.html.twig', [

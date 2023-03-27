@@ -11,6 +11,18 @@
             Registro de Usuarios
         {% endblock %}
         {% block cuerpo %}
+
+            {% for flash_message in app.session.flashbag.get('success') %}
+                <div class="alert alert-success" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+
+            {% for flash_message in app.session.flashbag.get('danger') %}
+                <div class="alert alert-danger" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
             
             {{form_start(formulario)}}
             {{form_row(formulario.email, 
