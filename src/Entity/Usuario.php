@@ -14,6 +14,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    const TIPO_ADMIN = "ADMINISTRADOR";
+
     /**
      * @var int
      *

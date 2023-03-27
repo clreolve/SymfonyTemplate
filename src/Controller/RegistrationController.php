@@ -20,7 +20,8 @@ class RegistrationController extends AbstractController
         EntityManagerInterface $em,
         UserPasswordHasherInterface $encoder
     ): Response
-    {/* 
+    {
+        /* 
         if($this->getUser()){
             return $this->redirectToRoute('home');
         } */

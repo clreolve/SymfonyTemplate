@@ -134,7 +134,7 @@
                     />
 
                     <p class="mb-0 d-none d-sm-block navbar-profile-name">
-                      {{ app.user.userIdentifier }}
+                      {{ app.user.nombre }} {{ app.user.apellido }}
                     </p>
                     <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                   </div>
@@ -143,7 +143,8 @@
                   class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
                   aria-labelledby="profileDropdown"
                 >
-                  <h6 class="p-3 mb-0">Perfil</h6>
+                  <h6 class="p-3 mb-0 text-info"> {{ app.user.tipo | default('Usuario') }} </h6>
+                  <p class="p-3 mb-0"> {{ app.user.email }} </p>
 
                   <!--Logout-->
                   <a

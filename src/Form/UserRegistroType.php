@@ -25,7 +25,7 @@ class UserRegistroType extends AbstractType
             ->add('apellido')
             ->add('tipo', ChoiceType::class,[
             'choices'  => [
-                'Supervisor' => 'SUPERVISOR',
+                'Supervisor' => Usuario::TIPO_ADMIN,
                 'Vendedor' => 'VENDEDOR',
                 'Cliente' => 'CLIENTE'
             ]
