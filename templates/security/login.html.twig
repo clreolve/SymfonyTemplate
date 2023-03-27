@@ -10,7 +10,7 @@ body %}
         {% block cuerpo %}
             <form method="post" class="forms-sample">
         {% if error %}
-        <div class="alert alert-danger row">
+        <div class="alert alert-danger" role="alert">
           {{ error.messageKey|trans(error.messageData, 'security') }}
         </div>
         {% endif %}
