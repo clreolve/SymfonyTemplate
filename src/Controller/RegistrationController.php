@@ -21,10 +21,6 @@ class RegistrationController extends AbstractController
         UserPasswordHasherInterface $encoder
     ): Response
     {
-        /* 
-        if($this->getUser()){
-            return $this->redirectToRoute('home');
-        } */
 
         $user = new Usuario();
         $form = $this->createForm(UserRegistroType::class, $user);
